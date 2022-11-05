@@ -1,0 +1,87 @@
+{
+  "name": "ok2fa",
+  "version": "0.0.4",
+  "description": "CLI Command for Two Factor Authentication",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "exports": "./dist/src/index.js",
+  "bin": {
+    "ok2fa": "bin/ok2fa.js"
+  },
+  "scripts": {
+    "dev": "ts-node ./src/index.ts",
+    "start": "node bin/ok2fa.js",
+    "test": "jest",
+    "build": "tsc",
+    "format": "npm run lint && npm run prettier",
+    "commitlint": "commitlint -f HEAD@{15}",
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .js,.ts,.tsx .",
+    "prettier": "prettier --check '**/*.{css,html,js,ts,json,md,yaml,yml}'",
+    "prettier:fix": "prettier --write '**/*.{css,html,js,ts,json,md,yaml,yml}'",
+    "release": "semantic-release",
+    "release-local": "node -r dotenv/config node_modules/semantic-release/bin/semantic-release --no-ci --dry-run",
+    "check-dependencies": "npx npm-check --skip-unused --update"
+  },
+  "dependencies": {
+    "@types/inquirer": "^8.2.0",
+    "@types/js-yaml": "^4.0.5",
+    "chalk": "^4.1.2",
+    "clipboardy": "^2.3.0",
+    "commander": "^9.0.0",
+    "inquirer": "^8.2.0",
+    "inquirer-search-list": "^1.2.6",
+    "js-yaml": "^4.1.0",
+    "otplib": "^12.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.0",
+    "@semantic-release/release-notes-generator": "^10.0.3",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^17.0.18",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.5",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
+    "semantic-release": "^19.0.2",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.4.0",
+    "typescript-json-schema": "^0.50.1"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint:fix && npm run prettier:fix"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,ts,tsx}": [
+      "npm run lint:fix"
+    ],
+    "**/*.{css,html,js,ts,json,md,yaml,yml}": [
+      "npm run prettier:fix"
+    ]
+  },
+  "keywords": [
+    "2fa",
+    "Two Factor Authentication",
+    "CLI"
+  ]
+}
